@@ -1,1 +1,201 @@
 /* Add your CSS here */
+body {
+  margin: 0; /* Remove default margin */
+  font-family: 'Roboto', Arial, sans-serif; /* Use Google Fonts Roboto */
+  color: #333; /* Default text color */
+}
+
+/* Use a serif font for all headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+/* Style for the top header section */
+.hero {
+  /* Add a background image (replace with your own if desired) */
+  background-image: url('img/hero-bg.jpg');
+  background-size: cover; /* Make the image cover the whole area */
+  background-position: center;
+  position: relative; /* Needed for overlay */
+  padding: 20px 20px; /* Even space: 40px top/bottom, 30px left/right */
+  min-height: unset; /* Remove min-height so padding controls spacing */
+  /*width: 100%; /* Full width */
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+}
+
+/* Overlay to make text readable */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 113, 197); /*Intel blue */
+  z-index: 1;
+}
+
+/* Content inside the hero section */
+.hero-content {
+  position: relative;
+  z-index: 2; /* Show above overlay */
+  text-align: center;
+  color: white;
+  padding: 40px 30px 40px 30px; /* Increase top and bottom padding */
+}
+
+/* Intel logo styling */
+.hero-logo {
+  width: 120px; /* Make logo smaller */
+  margin-bottom: 15px;
+}
+
+/* Main heading style */
+.hero-content h1 {
+  font-size: 2.2em;
+  margin: 10px 0;
+}
+
+/* Subheading style */
+.hero-content p {
+  font-size: 1.1em;
+  margin-top: 25px; /* Increase space above the paragraph */
+}
+
+/* Flexbox for logo and heading side-by-side */
+.hero-row {
+  display: flex; /* Use flexbox to arrange children in a row */
+  align-items: center; /* Vertically center the items */
+  justify-content: center; /* Center the row horizontally */
+  gap: 35px; /* Increase space between logo and heading */
+  margin-bottom: 30px; /* Add space below the row */
+}
+
+/* Make sure the heading doesn't get too close to the logo */
+.hero-row h1 {
+  margin: 0; /* Remove default margin */
+}
+
+/* Timeline background container */
+.timeline-bg {
+  background-color: #8fb3d7; /* Same as timeline background */
+  padding: 0; /* No extra padding needed */
+}
+
+/* Timeline section uses flexbox for horizontal layout */
+.timeline {
+  display: flex; /* Arrange children in a row */
+  flex-direction: row; /* Horizontal direction */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 20px; /* Space between cards */
+  padding: 30px 0 30px 0; /* Add some padding */
+  /* Remove background color from here */
+  max-width: calc(4 * 270px + 4 * 48px); /* Show only 4 cards + gaps + left padding */
+  margin-left: auto;
+  margin-right: auto;
+  scroll-snap-type: x mandatory; /* Enable horizontal snap */
+}
+
+/* Each timeline card styling */
+.timeline-card {
+  background: white; /* Card background */
+  color: #222; /* Card text color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Soft shadow */
+  min-width: 250px; /* Minimum width for each card */
+  max-width: 270px; /* Maximum width for each card */
+  flex: 0 0 auto; /* Prevent cards from shrinking or growing */
+  padding: 18px 14px; /* Space inside each card */
+  text-align: left; /* Align text to the left */
+  scroll-snap-align: start; /* Snap each card to the start of the scroll area */
+}
+
+/* Remove top margin from h2 and h3 in timeline cards */
+.timeline-card h2,
+.timeline-card h3 {
+  margin-top: 0;
+}
+
+/* Make images in cards fit nicely */
+.timeline-card img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* Hide tap instruction by default, show scroll instruction */
+.timeline-instruction {
+  display: none;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.timeline-scroll {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* Extra info for timeline cards - hidden by default */
+.timeline-extra {
+  display: block; /* Needed for transition, but hide with opacity */
+  opacity: 0; /* Start hidden */
+  max-height: 0; /* Collapse height */
+  overflow: hidden; /* Hide content when collapsed */
+  transition: opacity 0.4s ease, max-height 0.4s ease; /* Smooth fade and expand */
+  background: #e3f0fa; /* Light blue background for contrast */
+  color: #17406a; /* Dark blue text */
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 0.98em;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+/* Show extra info when hovering over the card */
+.timeline-card:hover .timeline-extra {
+  opacity: 1; /* Fade in */
+  max-height: 200px; /* Enough space for content */
+  pointer-events: auto; /* Allow interaction */
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 600px) {
+  /* Stack logo and heading vertically in hero */
+  .hero-row {
+    flex-direction: column; /* Stack items on top of each other */
+    gap: 15px; /* Less space needed vertically */
+    margin-bottom: 20px;
+  }
+
+  /* Make the timeline vertical */
+  .timeline {
+    flex-direction: column; /* Stack cards vertically */
+    gap: 20px;
+    padding: 20px 0 20px 0; /* Remove left padding */
+    overflow-x: visible; /* No horizontal scroll needed */
+  }
+
+  /* Make timeline cards take full width */
+  .timeline-card {
+    min-width: 0;
+    max-width: 100%;
+    width: 90%; /* Make cards a bit narrower than screen */
+    margin: 0 auto; /* Center cards */
+  }
+
+  /* Show tap instruction, hide scroll instruction */
+  .timeline-instruction {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .timeline-scroll {
+    display: none;
+  }
+}
